@@ -1,4 +1,4 @@
-package de.teclead.spring.boot.app;
+package de.teclead.spring_boot_app;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

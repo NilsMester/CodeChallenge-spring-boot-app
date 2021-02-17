@@ -1,4 +1,4 @@
-package de.teclead.spring.boot.app;
+package de.teclead.spring_boot_app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
