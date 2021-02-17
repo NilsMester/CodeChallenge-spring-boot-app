@@ -1,6 +1,6 @@
 #FileLock
-#Wed Feb 17 13:09:22 CET 2021
-server=192.168.179.69\:54813
+#Wed Feb 17 17:45:23 CET 2021
+server=192.168.179.69\:59026
 hostName=nilss-mbp-2.fritz.box
 method=file
-id=177afe5166d71f2a52814c70069c84b65412a724150
+id=177b0e1ca081d8db8c1f52d854abf7b7ebeb2157308
