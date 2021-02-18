@@ -51,4 +51,13 @@ public class UserService {
         userDataAccessObject.save(userToBeUpdated);
         return userToBeUpdated;
     }
+
+    public void deleteUser(String userId) {
+        userDataAccessObject
+                .findById(Integer.parseInt(userId))
+                .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        userDataAccessObject
+                .deleteById(Integer.parseInt(userId));
+    }
 }

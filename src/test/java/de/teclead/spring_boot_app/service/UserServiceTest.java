@@ -103,7 +103,7 @@ public class UserServiceTest {
     }
 
     @Test
-    @DisplayName("The \"updateUser\" method should return HttpStatus \"NOT FOUND\" ")
+    @DisplayName("The \"updateUser\" method should return HttpStatus \"NOT FOUND\"")
     void updateUserThrowsException(){
         //Given
         Integer userID = 12345;
@@ -129,6 +129,51 @@ public class UserServiceTest {
         //Than
         try {
             userService.updateUser(updateUserDataTransferObject);
+            fail("missing exception");
+        } catch (ResponseStatusException exception) {
+            assertThat(exception.getStatus(), is(HttpStatus.NOT_FOUND));
+        }
+    }
+
+    @Test
+    void deleteUser(){
+        //Given
+        Integer userID = 12345;
+
+        User userToBeDeleted = new User(
+                userID,
+                "Klaus",
+                "Mayer",
+                "k.mayer@gmail.com"
+        );
+
+        //When
+        when(userDataAccessObject.findById(userID)).thenReturn(Optional.of(userToBeDeleted));
+        userService.deleteUser(userID.toString());
+
+        //Then
+        verify(userDataAccessObject).deleteById(userID);
+    }
+
+    @Test
+    @DisplayName("The \"deleteUser\" method should return HttpStatus \"NOT FOUND\"")
+    void deleteUserThrowsException(){
+        //Given
+        Integer userID = 12345;
+
+        User userToBeDeleted = new User(
+                userID,
+                "Klaus",
+                "Mayer",
+                "k.mayer@gmail.com"
+        );
+
+        //When
+        when(userDataAccessObject.findById(userID)).thenReturn(Optional.empty());
+
+        //Then
+        try {
+            userService.deleteUser(userID.toString());
             fail("missing exception");
         } catch (ResponseStatusException exception) {
             assertThat(exception.getStatus(), is(HttpStatus.NOT_FOUND));

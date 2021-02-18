@@ -33,11 +33,13 @@ public class UserController {
     }
 
     @PutMapping("{userId}")
-    public User updateUser(@RequestBody UpdateUserDataTransferObject updateUserDataTransferObject,  @PathVariable String userId){
-        if(!userId.equals(updateUserDataTransferObject.getId().toString())){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-        }
+    public User updateUser(@RequestBody UpdateUserDataTransferObject updateUserDataTransferObject){
         return this.userService.updateUser(updateUserDataTransferObject);
+    }
+
+    @DeleteMapping("{userId}")
+    public void deleteUser(@PathVariable String userId){
+        userService.deleteUser(userId);
     }
 
 
