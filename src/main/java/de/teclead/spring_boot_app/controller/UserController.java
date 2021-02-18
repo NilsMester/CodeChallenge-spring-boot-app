@@ -5,9 +5,7 @@ import de.teclead.spring_boot_app.data_transfer_object.UpdateUserDataTransferObj
 import de.teclead.spring_boot_app.model.User;
 import de.teclead.spring_boot_app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
