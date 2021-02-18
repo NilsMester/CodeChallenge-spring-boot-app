@@ -161,13 +161,6 @@ public class UserServiceTest {
         //Given
         Integer userID = 12345;
 
-        User userToBeDeleted = new User(
-                userID,
-                "Klaus",
-                "Mayer",
-                "k.mayer@gmail.com"
-        );
-
         //When
         when(userDataAccessObject.findById(userID)).thenReturn(Optional.empty());
 
