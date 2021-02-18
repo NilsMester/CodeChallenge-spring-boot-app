@@ -1,11 +1,10 @@
 package de.teclead.spring_boot_app.controller;
 
+import de.teclead.spring_boot_app.data_transfer_object.AddUserDataTransferObject;
 import de.teclead.spring_boot_app.model.User;
 import de.teclead.spring_boot_app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,6 +22,11 @@ public class UserController {
     @GetMapping
     public List<User> getUserList(){
         return this.userService.getUserList();
+    }
+
+    @PostMapping
+    public User addUser(@RequestBody AddUserDataTransferObject addUserDataTransferObject){
+        return this.userService.addUser(addUserDataTransferObject);
     }
 
 
