@@ -60,4 +60,8 @@ public class UserService {
         userDataAccessObject
                 .deleteById(Integer.parseInt(userId));
     }
+
+    public List<User> getUserListWithSameFistName(String firstName) {
+        return userDataAccessObject.findAllByFirstNameEquals(firstName);
+    }
 }

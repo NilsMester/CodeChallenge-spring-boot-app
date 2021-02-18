@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -173,4 +174,23 @@ public class UserServiceTest {
         }
     }
 
+    @Test
+    void getAllUserWithSameFirstNameTest(){
+        //Given
+        String searchParameter = "James";
+
+        when(userDataAccessObject.findAllByFirstNameEquals(searchParameter)).thenReturn(new ArrayList<>(List.of(
+                new User(1, "James", "Cole", "j.cole@gmail.com"),
+                new User(5, "James", "Doe", "j.doe@gmail.com")
+        )));
+
+        //When
+        List<User> userListWithFirstNameJames = userService.getUserListWithSameFistName(searchParameter);
+
+        //Then
+        assertThat(userListWithFirstNameJames, is(List.of(
+                new User(1, "James", "Cole", "j.cole@gmail.com"),
+                new User(5, "James", "Doe", "j.doe@gmail.com")
+        )));
+    }
 }

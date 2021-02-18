@@ -42,6 +42,9 @@ public class UserController {
         userService.deleteUser(userId);
     }
 
-
+    @GetMapping("{firstName}")
+    public List<User> getUserListWithSameFistName(@PathVariable String firstName){
+        return this.userService.getUserListWithSameFistName(firstName);
+    }
 
 }

@@ -11,4 +11,6 @@ public interface UserDataAccessObject extends JpaRepository<User,Integer> {
 
     List<User> findAll();
 
+    List<User> findAllByFirstNameEquals(String firstName);
+
 }
