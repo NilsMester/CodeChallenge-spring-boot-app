@@ -5,6 +5,8 @@ import de.teclead.spring_boot_app.model.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
@@ -34,7 +36,7 @@ public class UserControllerIntegrationTest {
 
     @BeforeEach
     public void setubDatabase() {
-       /* userDataAccessObject.deleteAll();
+        /*userDataAccessObject.deleteAll();
         userDataAccessObject.saveAll(
                 List.of(
                         new User(1, "James", "Cole", "j.cole@gmail.com"),
@@ -50,7 +52,7 @@ public class UserControllerIntegrationTest {
     }
 
     @Test
-    public void testGetMapping() {
+    public void getMappingTest() {
         //Given
         List<User> stockUser = new ArrayList<>(List.of(
                 new User(1, "Max", "Mustermann", "mm@gmail.com"),
