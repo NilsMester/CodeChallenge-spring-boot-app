@@ -39,7 +39,7 @@ public class UserService {
     public User updateUser(UpdateUserDataTransferObject updateUserDataTransferObject) {
         userDataAccessObject
                 .findById(updateUserDataTransferObject.getId())
-                .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
 
         User userToBeUpdated = User.builder()
                 .id(updateUserDataTransferObject.getId())
@@ -55,7 +55,7 @@ public class UserService {
     public void deleteUser(String userId) {
         userDataAccessObject
                 .findById(Integer.parseInt(userId))
-                .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
         userDataAccessObject
                 .deleteById(Integer.parseInt(userId));

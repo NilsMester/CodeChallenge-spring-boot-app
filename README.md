@@ -1,6 +1,8 @@
 # Code Challenge Spring Boot App
-## Position: Junior Software Developer Java 
-### Tags: 
+
+## Position: Junior Software Developer Java
+
+### Tags:
 
     - Jetty Webserver
     - H2, embedded Database (in memory & persistence)

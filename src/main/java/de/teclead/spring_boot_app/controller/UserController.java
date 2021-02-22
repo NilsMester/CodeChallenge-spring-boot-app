@@ -21,27 +21,27 @@ public class UserController {
     }
 
     @GetMapping
-    public List<User> getUserList(){
+    public List<User> getUserList() {
         return this.userService.getUserList();
     }
 
     @PostMapping
-    public User addUser(@RequestBody AddUserDataTransferObject addUserDataTransferObject){
+    public User addUser(@RequestBody AddUserDataTransferObject addUserDataTransferObject) {
         return this.userService.addUser(addUserDataTransferObject);
     }
 
     @PutMapping("{userId}")
-    public User updateUser(@RequestBody UpdateUserDataTransferObject updateUserDataTransferObject){
+    public User updateUser(@RequestBody UpdateUserDataTransferObject updateUserDataTransferObject) {
         return this.userService.updateUser(updateUserDataTransferObject);
     }
 
     @DeleteMapping("{userId}")
-    public void deleteUser(@PathVariable String userId){
+    public void deleteUser(@PathVariable String userId) {
         userService.deleteUser(userId);
     }
 
     @GetMapping("{firstName}")
-    public List<User> getUserListWithSameFistName(@PathVariable String firstName){
+    public List<User> getUserListWithSameFistName(@PathVariable String firstName) {
         return this.userService.getUserListWithSameFistName(firstName);
     }
 

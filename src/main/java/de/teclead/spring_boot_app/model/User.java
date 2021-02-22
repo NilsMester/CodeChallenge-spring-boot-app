@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Table(name= "TBL_USER")
+@Table(name = "TBL_USER")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,10 +22,10 @@ public class User {
     @Column(name = "first_name")
     String firstName;
 
-    @Column(name="last_name")
+    @Column(name = "last_name")
     String lastName;
 
-    @Column(name="email")
+    @Column(name = "email")
     String email;
 
 

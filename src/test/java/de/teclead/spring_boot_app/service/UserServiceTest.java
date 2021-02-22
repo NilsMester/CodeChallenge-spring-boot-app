@@ -28,7 +28,7 @@ public class UserServiceTest {
     final UserService userService = new UserService(userDataAccessObject);
 
     @Test
-    void getAllUserTest(){
+    void getAllUserTest() {
         //Given
         when(userDataAccessObject.findAll()).thenReturn(UserSeeder.getStockUser());
 
@@ -40,7 +40,7 @@ public class UserServiceTest {
     }
 
     @Test
-    void addUserTest(){
+    void addUserTest() {
         //Given
         AddUserDataTransferObject addUserDataTransferObject = new AddUserDataTransferObject(
                 "Klaus",
@@ -67,7 +67,7 @@ public class UserServiceTest {
 
     @Test
     @DisplayName("The \"updateUser\" method should return the updated User object")
-    void updateUserTest(){
+    void updateUserTest() {
         //Given
         Integer userID = 12345;
 
@@ -105,7 +105,7 @@ public class UserServiceTest {
 
     @Test
     @DisplayName("The \"updateUser\" method should return HttpStatus \"NOT FOUND\"")
-    void updateUserThrowsException(){
+    void updateUserThrowsException() {
         //Given
         Integer userID = 12345;
 
@@ -137,7 +137,7 @@ public class UserServiceTest {
     }
 
     @Test
-    void deleteUser(){
+    void deleteUser() {
         //Given
         Integer userID = 12345;
 
@@ -158,7 +158,7 @@ public class UserServiceTest {
 
     @Test
     @DisplayName("The \"deleteUser\" method should return HttpStatus \"NOT FOUND\"")
-    void deleteUserThrowsException(){
+    void deleteUserThrowsException() {
         //Given
         Integer userID = 12345;
 
@@ -175,7 +175,7 @@ public class UserServiceTest {
     }
 
     @Test
-    void getAllUserWithSameFirstNameTest(){
+    void getAllUserWithSameFirstNameTest() {
         //Given
         String searchParameter = "James";
 

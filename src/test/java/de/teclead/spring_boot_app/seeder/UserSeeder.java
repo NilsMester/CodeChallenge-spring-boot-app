@@ -7,7 +7,7 @@ import java.util.List;
 
 public class UserSeeder {
 
-    private static final  List<User> user = new ArrayList<>(List.of(
+    private static final List<User> user = new ArrayList<>(List.of(
             new User(1, "James", "Cole", "j.cole@gmail.com"),
             new User(2, "Max", "Mustermann", "mm@gmail.com"),
             new User(3, "John", "Doe", "johnny@gmail.com"),
@@ -16,5 +16,7 @@ public class UserSeeder {
 
     ));
 
-    public static List<User> getStockUser(){return user;}
+    public static List<User> getStockUser() {
+        return user;
+    }
 }

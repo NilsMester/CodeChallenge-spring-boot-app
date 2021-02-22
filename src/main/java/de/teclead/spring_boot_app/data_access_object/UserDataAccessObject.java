@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface UserDataAccessObject extends JpaRepository<User,Integer> {
+public interface UserDataAccessObject extends JpaRepository<User, Integer> {
 
     List<User> findAll();
 
