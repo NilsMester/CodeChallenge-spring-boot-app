@@ -4,8 +4,11 @@ import de.teclead.spring_boot_app.data_access_object.UserDataAccessObject;
 import de.teclead.spring_boot_app.data_transfer_object.AddUserDataTransferObject;
 import de.teclead.spring_boot_app.data_transfer_object.UpdateUserDataTransferObject;
 import de.teclead.spring_boot_app.model.User;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
@@ -15,7 +18,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.test.context.jdbc.Sql;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,9 +26,13 @@ import java.util.Optional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.AFTER_TEST_METHOD;
+import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.BEFORE_TEST_METHOD;
 
 @Profile("development")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@Sql(scripts = "/clean-up.sql", executionPhase = BEFORE_TEST_METHOD)
+@Sql(scripts = "/clean-up.sql", executionPhase = AFTER_TEST_METHOD)
 public class UserControllerIntegrationTest {
 
     @LocalServerPort
@@ -41,8 +48,17 @@ public class UserControllerIntegrationTest {
         return "http://localhost:" + port + "/api/user";
     }
 
+    @BeforeEach
+    public void setupDb() {
+        userDataAccessObject.saveAll(List.of(
+                new User(1, "Max", "Mustermann", "mm@gmail.com"),
+                new User(2, "John", "Doe", "johnny@gmail.com"),
+                new User(3, "Jaine", "Doe", "j.doe@gmail.com"),
+                new User(4, "Max", "Mayer", "m.mayer@gmail.com")
+        ));
+    }
+
     @Test
-    @Transactional
     public void getUserListTest() {
         //Given
         List<User> stockUser = new ArrayList<>(List.of(
@@ -63,7 +79,6 @@ public class UserControllerIntegrationTest {
     }
 
     @Test
-    @Transactional
     public void postUserShouldAddANewUser() {
         // GIVEN
         String url = getUserUrl();
@@ -85,7 +100,6 @@ public class UserControllerIntegrationTest {
     }
 
     @Test
-    @Transactional
     public void updateUserShouldUpdateExistingUser(){
         //Given
         String url = getUserUrl() + "/4";
@@ -111,7 +125,6 @@ public class UserControllerIntegrationTest {
     }
 
     @Test
-    @Transactional
     public void updateUserShouldReturnBadRequest(){
         //Given
         String url = getUserUrl() + "/4";
@@ -129,7 +142,6 @@ public class UserControllerIntegrationTest {
     }
 
     @Test
-    @Transactional
     public void deleteUserByIdTest(){
         //Given
         String url = getUserUrl() + "/3";
@@ -143,10 +155,9 @@ public class UserControllerIntegrationTest {
     }
 
     @Test
-    @Transactional
     public void deleteUserShouldReturnNotFound(){
         //Given
-        String url = getUserUrl() + "/25";
+        String url = getUserUrl() + "/5";
 
         //When
         HttpEntity<Void> entity = new HttpEntity<>(null);
@@ -157,7 +168,6 @@ public class UserControllerIntegrationTest {
     }
 
     @Test
-    @Transactional
     public void findAllByFirstName(){
         //Given
         String url = getUserUrl() + "/Max";
@@ -174,14 +184,4 @@ public class UserControllerIntegrationTest {
         assertThat(response.getStatusCode(), is(HttpStatus.OK));
         assertThat(response.getBody(), is(stockUserWithFirstNameMax.toArray()));
     }
-
-
-
-
-
-
-
-
-
-
 }
